@@ -1,0 +1,52 @@
+﻿<Page x:Class="ChatClient.pages.LoginPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ChatClient.pages"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+      TextElement.FontWeight="Regular"
+      TextElement.FontSize="13"
+      TextOptions.TextFormattingMode="Ideal"
+      TextOptions.TextRenderingMode="Auto"
+      Background="{DynamicResource MaterialDesignPaper}"
+      FontFamily="{DynamicResource MaterialDesignFont}"
+      mc:Ignorable="d"
+      Title="Авторизация" Height="285" Width="350">
+    <Grid Margin="0 10 0 10">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBlock
+            Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+            Text="Вход в ChatOn" 
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"/>
+        <TextBox
+            Grid.Row="1"
+            materialDesign:HintAssist.Hint="Логин"
+            Width="150"
+            Height="30"
+            Text="{Binding Path=UserName, UpdateSourceTrigger=PropertyChanged}">
+        </TextBox>
+        <TextBox
+            Grid.Row="2"
+            materialDesign:HintAssist.Hint="Пароль"
+            materialDesign:TextFieldAssist.HasClearButton="True"
+            Width="150"
+            Height="30"
+            Text="{Binding Path=Password, UpdateSourceTrigger=PropertyChanged}">
+        </TextBox>
+        <Button
+            Grid.Row="3"
+            Style="{StaticResource MaterialDesignRaisedButton}"
+            Content="Войти" 
+            Width="100"
+            Height="39"
+            Command="{Binding LoginCmd}"/>
+    </Grid>
+</Page>

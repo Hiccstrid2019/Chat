@@ -1,0 +1,158 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+body {
+    background-color: #82478C;
+}
+
+.welcome {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 4em;
+    color: #ffffff;
+    text-align: center;
+    margin-top: 10%;
+}
+
+.head {
+    margin: 10px;
+    padding-right: 150px;
+}
+
+.end {
+    margin: 10px;
+    padding-left: 150px;
+}
+
+.on {
+    color: #33C333;
+}
+
+.reg {
+    padding: 15px 35px;
+    font-family: 'Josefin Sans', sans-serif;
+    color: #82478C;
+    font-size: 1.9em;
+    margin: 30px;
+    margin-left: 45%;
+    border: none;
+    border-radius: 15px;
+    transition-property: background-color, color;
+    transition-duration: .7s;
+    transition-timing-function: ease-in;
+}
+
+.reg:hover {
+    background-color: #33C333;
+    color: #ffffff;
+}
+
+form {
+    display: inline-block;
+}
+
+.registerform {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 3em;
+    color: #ffffff;
+    max-width: 500px;
+    margin: 10px auto;
+    padding: 10px;
+    background: rgba(44, 71, 112, .2);
+    text-align: center;
+}
+
+input::-webkit-input-placeholder {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 20px;
+    line-height: 3;
+}
+
+.registerform input[type="text"],
+.registerform input[type="password"] {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 20px;
+    width: 400px;
+    padding: 3%;
+    margin: 10px;
+    margin-bottom: 15px;
+    border: 2px #261B78 solid;
+}
+
+.registerform input[type="text"]:focus,
+.registerform input[type="password"]:focus {
+    box-shadow: 0 0 5px #33C333;
+    border: 1px #33C333 solid;
+}
+
+.registerform input[type="submit"] {
+    background-color: #33C333;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 30px;
+    color: #ffffff;
+    padding: 10px 65px;
+    transition: background-color .5s ease-in;
+    border: none;
+    margin-bottom: 30px;
+    margin-top: 15px;
+}
+
+.registerform input[type="submit"]:hover {
+    background-color: #1e9c1e;
+}
+
+.field-validation-error {
+    font-family: Arial;
+    font-size: 14px;
+    text-align: left;
+    font-style: italic;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    margin-left: 110px;
+    display: block;
+}
+
+.block-thanks {
+    font-family: 'Orelega One', cursive;
+    color: #ffffff;
+    font-size: 2em;
+    margin-top: 15%;
+    text-align: center;
+}
+
+.goapp {
+    background-color: #33C333;
+    padding: 20px 30px;
+    margin: 30px;
+    color: #ffffff;
+    font-family: 'Orelega One';
+    font-size: .8em;
+    border: none;
+    border-radius: 5px;
+    animation: borderanimation 3s infinite alternate;
+}
+
+@keyframes borderanimation {
+    from {
+        box-shadow: 0 0 2px #33C333;
+    }
+
+    to {
+        box-shadow: 0 0 25px #33C333;
+    }
+}
+

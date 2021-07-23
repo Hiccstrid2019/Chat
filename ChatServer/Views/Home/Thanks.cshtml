@@ -1,0 +1,11 @@
+﻿@model ChatServer.Models.RegisterModel
+
+@{
+    ViewBag.Title = "Thanks";
+}
+
+<div class="block-thanks">
+    <div class="thanks">&#9989; @Model.Nickname, Вы были успешно зарегистрированы в системе.</div>
+    <div class="app">Теперь можете авторизовываться в приложении.</div>
+    <a href="#"><button class="goapp">Перейти</button></a>
+</div>
