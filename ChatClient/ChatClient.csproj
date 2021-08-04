@@ -114,6 +114,7 @@
       <DependentUpon>MessagesPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Services\ChatService.cs" />
+    <Compile Include="Services\IChatService.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Page Include="MainWindow.xaml">
