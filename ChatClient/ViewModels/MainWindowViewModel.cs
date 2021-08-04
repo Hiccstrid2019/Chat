@@ -13,6 +13,14 @@ namespace ChatClient.ViewModels
     public class MainWindowViewModel : ViewModelBase
     {
         private ChatService chatService;
+        public MainWindowViewModel()
+        {
+            chatService = new ChatService();
+            chatService.NewTextMessageRecived += NewTextMessageRecived;
+            chatService.Logged += Logged;
+            chatService.ShowAllUsers += ShowAllUsers;
+            chatService.NewTextMessageFromGroup += NewTextMessageFromGroup;
+        }
 
         private bool _isLogged;
         public bool IsLogged
@@ -208,15 +216,6 @@ namespace ChatClient.ViewModels
             };
             SelectedMember.Chat.Add(msg);
             TextMessage = string.Empty;
-        }
-
-        public MainWindowViewModel()
-        {
-            chatService = new ChatService();
-            chatService.NewTextMessageRecived += NewTextMessageRecived;
-            chatService.Logged += Logged;
-            chatService.ShowAllUsers += ShowAllUsers;
-            chatService.NewTextMessageFromGroup += NewTextMessageFromGroup;
         }
 
         private void NewTextMessageRecived(string name, string message)
