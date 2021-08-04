@@ -11,7 +11,11 @@ namespace ChatServer.Controllers
 {
     public class HomeController : Controller
     {
-        private UsersContext userContext = new UsersContext();
+        private IRepository repository;
+        public HomeController(IRepository repositoryParam)
+        {
+            repository = repositoryParam;
+        }
         public ActionResult Index()
         {
             return View();
@@ -23,13 +27,12 @@ namespace ChatServer.Controllers
         }
 
         [HttpPost]
-        public ActionResult Register( RegisterModel model)
+        public ViewResult Register(RegisterModel model)
         {
             if (ModelState.IsValid)
             {
                 ApplicationUser newUser = new ApplicationUser { UserName = model.Nickname, Password = model.Password };
-                userContext.ApplicationUsers.Add(newUser);
-                userContext.SaveChanges();
+                repository.Create(newUser);
                 return View("Thanks", model);
             }
             else

@@ -10,12 +10,18 @@ namespace ChatServer
     [HubName("chatHub")]
     public class ChatHub : Hub
     {
-        private UsersContext userContext = new UsersContext();
+        //private UsersContext userContext = new UsersContext();
+        IRepository repository;
+        public ChatHub(IRepository repositoryParam)
+        {
+            repository = repositoryParam;
+        }
         private static readonly Dictionary<string, string> ConnectedUsers = new Dictionary<string, string>();
         private static List<string> NamesGroup = new List<string>();
         public void LogIn(string name, string password)
         {
-            if (userContext.ApplicationUsers.Any(user => user.UserName == name && user.Password == password))
+            var user = repository.Get(name);
+            if (user != null && (user.UserName == name && user.Password == password))
             {
                 if (ConnectedUsers.ContainsKey(name))
                 {
@@ -35,7 +41,8 @@ namespace ChatServer
         }
         public void Send(string name, string sender, string message)
         {
-            if (userContext.ApplicationUsers.Any(user => user.UserName == sender))
+            var user = repository.Get(sender);
+            if (user != null)
             {
                 if (NamesGroup.Contains(name))
                 {
@@ -50,8 +57,7 @@ namespace ChatServer
 
         public void GetAllUsers()
         {
-            Clients.Caller.ShowAllUsers((from u in userContext.ApplicationUsers orderby u.UserName
-                                         select u.UserName).ToList());
+            Clients.Caller.ShowAllUsers(repository.GetAllUserNames());
         }
 
         public void CreateGroup(string GroupName, List<string> Usernames)
