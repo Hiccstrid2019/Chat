@@ -5,7 +5,7 @@ using System.Windows;
 
 namespace ChatClient.Services
 {
-    class ChatService
+    class ChatService : IChatService
     {
         private IHubProxy hubProxy;
         private HubConnection connection;
@@ -45,9 +45,9 @@ namespace ChatClient.Services
             hubProxy.Invoke("GetAllUsers").Wait();
         }
 
-        public void CreateGroup(string GroupName, List<string> Usernames)
+        public void CreateGroup(string groupName, IList<string> usernames)
         {
-            hubProxy.Invoke("CreateGroup", GroupName, Usernames).Wait();
+            hubProxy.Invoke("CreateGroup", groupName, usernames).Wait();
         }
     }
 }
