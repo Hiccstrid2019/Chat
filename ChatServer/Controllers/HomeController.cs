@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using ChatServer.Models;
 using ChatServer.DAL;
-using System.Data.Entity;
 
 namespace ChatServer.Controllers
 {
@@ -31,7 +26,7 @@ namespace ChatServer.Controllers
         {
             if (ModelState.IsValid)
             {
-                ApplicationUser newUser = new ApplicationUser { UserName = model.Nickname, Password = model.Password };
+                User newUser = new User { UserName = model.Nickname, Password = model.Password };
                 repository.Create(newUser);
                 return View("Thanks", model);
             }
@@ -40,10 +35,5 @@ namespace ChatServer.Controllers
                 return View();
             }
         }
-        public ActionResult Chat()
-        {
-            return View();
-        }
-
     }
 }

@@ -5,7 +5,7 @@ using System.Web;
 
 namespace ChatServer.Models
 {
-    public class ApplicationUser
+    public class User
     {
         public int ID { get; set; }
         public string UserName { get; set; }

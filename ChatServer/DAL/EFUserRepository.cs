@@ -10,19 +10,19 @@ namespace ChatServer.DAL
     {
         private UsersContext context = new UsersContext();
 
-        public void Create(ApplicationUser user)
+        public void Create(User user)
         {
-            context.ApplicationUsers.Add(user);
+            context.Users.Add(user);
             SaveChanges();
         }
-        public ApplicationUser Get(string username)
+        public User Get(string username)
         {
-            return context.ApplicationUsers.FirstOrDefault(user => user.UserName == username);
+            return context.Users.FirstOrDefault(user => user.UserName == username);
         }
 
         public List<string> GetAllUserNames()
         {
-            return (from u in context.ApplicationUsers
+            return (from u in context.Users
                     orderby u.UserName
                     select u.UserName).ToList();
         }

@@ -5,8 +5,8 @@ namespace ChatServer.DAL
 {
     public interface IRepository
     {
-        void Create(ApplicationUser user);
-        ApplicationUser Get(string username);
+        void Create(User user);
+        User Get(string username);
         List<string> GetAllUserNames();
     }
 }
