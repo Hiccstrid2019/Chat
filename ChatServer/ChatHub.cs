@@ -10,7 +10,6 @@ namespace ChatServer
     [HubName("chatHub")]
     public class ChatHub : Hub
     {
-        //private UsersContext userContext = new UsersContext();
         IRepository repository;
         public ChatHub(IRepository repositoryParam)
         {
