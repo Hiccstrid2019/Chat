@@ -5,16 +5,19 @@
 }
 
 <div class="registerform">
-    @using (Html.BeginForm())
-    {
-        @*@Html.ValidationSummary()*@
-        <span>Register</span>
-        @Html.TextBoxFor(x => x.Nickname, new { placeholder = "Your Nickname" })
-        <div>@Html.ValidationMessage("Nickname")</div>
-        @Html.PasswordFor(x => x.Password, new { placeholder = "Password" })
-        <div>@Html.ValidationMessage("Password")</div>
-        @Html.PasswordFor(x => x.ConfirmPassword, new { placeholder = "Confirm Password" })
-        <div>@Html.ValidationMessage("ConfirmPassword")</div>
-        <input type="submit" value="Sign Up" />
-    }
+    <form action="@Url.Action("Register", "Home")" method="post">
+        <label asp-for="Nickname"></label>
+        <input asp-for="Nickname"/>
+        <span asp-validation-for="Nickname"></span>
+        
+        <label asp-for="Password"></label>
+        <input asp-for="Password"/>
+        <span asp-validation-for="Password"></span>
+        
+        <label asp-for="ConfirmPassword"></label>
+        <input asp-for="ConfirmPassword"/>
+        <span asp-validation-for="ConfirmPassword"></span>
+        
+        <button type="submit">Register</button>
+    </form>
 </div>

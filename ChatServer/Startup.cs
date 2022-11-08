@@ -1,20 +1,51 @@
-﻿using Microsoft.AspNet.SignalR;
-using Microsoft.AspNet.SignalR.Infrastructure;
-using Microsoft.Owin;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using Owin;
-using System;
-using System.Reflection;
+﻿using ChatServer.Data;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
-[assembly: OwinStartup(typeof(ChatServer.Startup))]
 namespace ChatServer
 {
     public class Startup
     {
-        public void Configuration(IAppBuilder app)
+        public Startup(IConfiguration configuration)
         {
-            app.MapSignalR();
+            Configuration = configuration;
+        }
+        
+        public IConfiguration Configuration { get; }
+
+        public void ConfigureServices(IServiceCollection services)
+        {
+            var connString = Configuration.GetConnectionString("DefaultConnection");
+            var serverVersion = ServerVersion.AutoDetect(connString);
+            
+            services.AddDbContext<AppDbContext>(options => options.UseMySql(connString, serverVersion));
+
+            services.AddMvc();
+            services.AddSignalR();
+            
+            services.AddScoped<UserService>();
+        }
+
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            app.UseStaticFiles();
+            
+            app.UseRouting();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+            });
         }
     }
 }

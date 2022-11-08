@@ -1,39 +1,36 @@
-﻿using System.Web.Mvc;
+﻿using ChatServer.Data;
 using ChatServer.Models;
-using ChatServer.DAL;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ChatServer.Controllers
 {
     public class HomeController : Controller
     {
-        private IRepository repository;
-        public HomeController(IRepository repositoryParam)
+        private readonly UserService _service;
+        public HomeController(UserService service)
         {
-            repository = repositoryParam;
+            _service = service;
         }
-        public ActionResult Index()
+        public IActionResult Index()
         {
             return View();
         }
 
-        public ActionResult Register()
+        public IActionResult Register()
         {
             return View();
         }
 
         [HttpPost]
-        public ViewResult Register(RegisterModel model)
+        public IActionResult Register(RegisterModel model)
         {
             if (ModelState.IsValid)
             {
-                User newUser = new User { UserName = model.Nickname, Password = model.Password };
-                repository.Create(newUser);
+                var newUser = new User { UserName = model.Nickname, Password = model.Password };
+                _service.CreateUser(newUser);
                 return View("Thanks", model);
             }
-            else
-            {
-                return View();
-            }
+            return View(model);
         }
     }
 }
