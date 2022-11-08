@@ -14,7 +14,7 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         mc:Ignorable="d"
         Title="ChatON" Height="450" Width="800"
-        DataContext="{Binding ViewModel, RelativeSource={RelativeSource Self}}" Icon="chat.png">
+        DataContext="{Binding ViewModel, RelativeSource={RelativeSource Self}}" Icon="/Resources/chat.png">
     <Grid>
         <Frame x:Name="mainFrame"
                NavigationUIVisibility="Hidden"
