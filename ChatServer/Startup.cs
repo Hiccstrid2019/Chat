@@ -2,6 +2,7 @@
 using ChatServer.Hubs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,11 +25,17 @@ namespace ChatServer
             var serverVersion = ServerVersion.AutoDetect(connString);
             
             services.AddDbContext<AppDbContext>(options => options.UseMySql(connString, serverVersion));
-
+            
+            services.AddDefaultIdentity<IdentityUser>(options =>
+            {
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireDigit = false;
+                options.Password.RequiredLength = 8;
+            }).AddEntityFrameworkStores<AppDbContext>();
+            
             services.AddMvc();
             services.AddSignalR();
             
-            services.AddScoped<UserService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -41,12 +48,16 @@ namespace ChatServer
             
             app.UseRouting();
 
+            app.UseAuthentication();
+            app.UseAuthorization();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapHub<ChatHub>("/chatHub");
+                endpoints.MapRazorPages();
             });
         }
     }

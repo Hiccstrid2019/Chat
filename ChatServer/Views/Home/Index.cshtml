@@ -3,13 +3,15 @@
     ViewBag.Title = "Index";
 }
 
-<div>
-    <div class="welcome">
-        <div class="head">Welcome</div>
-        <div class="middle">to the</div>
-        <div class="end">Chat<span class="on">ON</span></div>
+<div class="h-100 justify-content-center align-items-center">
+    <div>
+        Welcome to the ChatOn
     </div>
 
-    <a href="@Url.Action("Register", "Home")"><button class="reg">Register</button></a>
+    <div>
+        <a href="@Url.Action("Index", "Home")">
+                <button type="button" class="btn btn-outline-primary">Register</button>
+            </a>
+    </div>
 </div>
 

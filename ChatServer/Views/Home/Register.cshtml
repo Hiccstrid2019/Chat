@@ -5,7 +5,7 @@
 }
 
 <div class="registerform">
-    <form action="@Url.Action("Register", "Home")" method="post">
+    <form action="@Url.Action("Index", "Home")" method="post">
         <label asp-for="Nickname"></label>
         <input asp-for="Nickname"/>
         <span asp-validation-for="Nickname"></span>

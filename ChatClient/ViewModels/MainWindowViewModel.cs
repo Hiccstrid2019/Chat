@@ -139,7 +139,7 @@ namespace ChatClient.ViewModels
         private bool CanLogin() => UserName != null && Password != null;
         private void Login()
         {
-            chatService.Connect();
+            // chatService.Connect();
             chatService.LogIn(UserName, Password);
             if (IsLogged)
                 (Application.Current.MainWindow as MainWindow)?.mainFrame.Navigate(new Uri("/Pages/MessagesPage.xaml", UriKind.RelativeOrAbsolute));
