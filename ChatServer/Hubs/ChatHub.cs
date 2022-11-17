@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
@@ -14,16 +13,9 @@ namespace ChatServer.Hubs
         private static readonly Dictionary<string, string> ConnectedUsers = new Dictionary<string, string>();
         private static readonly List<string> NamesGroup = new List<string>();
         
-        public async Task LogIn(string name, string password)
-        {
-            ConnectedUsers.Add(name, Context.ConnectionId);
-            await Clients.Caller.SendAsync("Logged");
-        }
     
         public override async Task OnDisconnectedAsync(Exception? exception)
         {
-            var delUser = ConnectedUsers.First(connId => connId.Value == Context.ConnectionId);
-            ConnectedUsers.Remove(delUser.Key);
             await base.OnDisconnectedAsync(exception);
         }
         
