@@ -4,7 +4,7 @@ namespace ChatClient.Services
 {
     public interface IChatService
     {
-        void Connect();
+        void Connect(string token);
         void SendTextMessage(string name, string sender, string message);
         void LogIn(string name, string password);
         void GetAllUsers();
