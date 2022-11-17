@@ -1,6 +1,6 @@
-﻿using ChatServer.Data;
+﻿using System.Text;
+using ChatServer.Data;
 using ChatServer.Hubs;
-using ChatServer.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 namespace ChatServer
 {
@@ -37,7 +38,17 @@ namespace ChatServer
 
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearerConfiguration();
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters()
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8
+                            .GetBytes(Configuration["JWT:Token"])),
+                        ValidateIssuer = false,
+                        ValidateAudience = false
+                    };
+                });
             
             services.AddMvc();
             services.AddSignalR();
